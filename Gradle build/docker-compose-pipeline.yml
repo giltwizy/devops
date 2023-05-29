@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  loan-trx-manager:
+    container_name: 'loan-trx-manager'
+    image: 172.32.5.240:5050/loan-trx-manager:tagVersion
+    ports:
+      - "8086:8086"
+    networks:
+      - credit-pro
+    restart: always
+    environment:
+      - APPLICATION_PORT=8086
+      - CBS_DB_USERNAME="dummy"
+      - CBS_DB_PASSWORD="dummy"
+      - CBS_DB_HOST="dummy"
+      - CBS_DB_PORT=9090
+      - CBS_DB_SERVICE="dummy"
+    
+networks:
+  credit-pro:
+    external: true

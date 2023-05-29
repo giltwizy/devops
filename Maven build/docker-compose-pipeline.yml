@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  credit_pro_user_management:
+    container_name: 'credit_pro_user_management'    
+    image: 172.32.5.240:5050/credit-pro-user-management:tagVersion
+    restart: unless-stopped
+    ports:
+      - "8088:8088"    
+    networks:
+      - credit-pro
+    environment:
+      - APPLICATION_HOST=localhost
+      - APPLICATION_PORT=8088
+      - CREDITPRO_SCHEMA=CREDITUSER
+      - CREDITPRO_DB_HOST=172.31.3.235
+      - CREDITPRO_DB_INSTANCE=CREDTDEV
+      - CREDITPRO_DB_PASSWORD=wfadmin_123
+      - CREDITPRO_DB_PORT=1522
+      - CREDITPRO_DB_USERNAME=wfadmin
+      - JWT_SECRET_KEY=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      - JWT_TOKEN_EXPIRE_TIME_IN_SECONDS=86400000
+      - LDAP_BASE=dc=CRDBBANKPLC,dc=COM
+      - LDAP_READ_TIMEOUT=1000
+      - LDAP_REFERRAL=follow
+      - LDAP_SECURITY_AUTHENTICATION=simple
+      - LDAP_URL=ldap://192.168.131.20:389
+      - LDAP_USER_DOMAIN=@CRDBBANKPLC.COM
+      - LDAP_USER_FILTER=sAMAccountName
+      - LOG_FILE_NAME=./classes/logs/credit_pro_user_management.log
+      - SECURE_RANDOM_CHARS=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+networks:
+  credit-pro:
+    external: true
